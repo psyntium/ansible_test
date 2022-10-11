@@ -1,0 +1,25 @@
+# Copyright (c) IBM Corporation 2019, 2020
+# Apache License, Version 2.0 (see https://opensource.org/licenses/Apache-2.0)
+
+#ibmi-fix-repo-sample.yml 
+#The sample file is to provide an example about how to manipulate the PTF database
+---
+- hosts: all
+  gather_facts: false
+  collections:
+   - ibm.power_ibmi
+  
+  vars:
+    save_file_path: {{ save_file_path }}
+    lib_name: {{ lib_name }}
+
+  tasks:
+    - name: Copy a save file from local to a remote IBM i node
+      ibmi_copy:
+        src: {{ save_file_path }}
+        lib_name: {{ lib_name }}
+      register: results
+
+    - name: results
+      debug:
+        msg: "{{ results }}"
