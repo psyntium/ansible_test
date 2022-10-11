@@ -13,13 +13,14 @@
     save_file_path: "{{ save_file_path }}"
     lib_name: "{{ lib_name }}"
     host_ip: "{{ host_ip }}"
+    ansible_user: "{{ ansible_user }}"
 
   tasks:
     - name: Copy file from localhost to awx
       fetch:
         src: "{{ save_file_path }}"
         dest: "/tmp/{{ save_file_path }}"
-      delegate_to: "{{ host_ip }}"
+      delegate_to: "{{ ansible_user }}@{{ host_ip }}"
 
     - name: Copy a save file from awx to a remote IBM i node
       ibmi_copy:
