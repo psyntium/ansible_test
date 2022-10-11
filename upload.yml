@@ -10,14 +10,14 @@
    - ibm.power_ibmi
   
   vars:
-    save_file_path: {{ save_file_path }}
-    lib_name: {{ lib_name }}
+    save_file_path: "{{ save_file_path }}"
+    lib_name: "{{ lib_name }}"
 
   tasks:
     - name: Copy a save file from local to a remote IBM i node
       ibmi_copy:
-        src: {{ save_file_path }}
-        lib_name: {{ lib_name }}
+        src: "{{ save_file_path }}"
+        lib_name: "{{ lib_name }}"
       register: results
 
     - name: results
