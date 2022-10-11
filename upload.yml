@@ -20,7 +20,8 @@
       fetch:
         src: "{{ save_file_path }}"
         dest: "/tmp/{{ save_file_path }}"
-      delegate_to: "{{ ansible_user }}@{{ host_ip }}"
+      delegate_to: "{{ host_ip }}"
+      remote_user: "{{ ansible_user }}"
 
     - name: Copy a save file from awx to a remote IBM i node
       ibmi_copy:
