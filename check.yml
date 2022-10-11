@@ -1,0 +1,34 @@
+---
+- name: IBM i check a set of PTFs
+  hosts: all
+  collections:
+   - ibm.power_ibmi
+
+  vars:
+    check_ptf_list:
+      - {'ptf_id':'*ALL', 'product':'*ALL', 'release': '*ALL'}
+
+  tasks:
+    - name: check ptf status
+      include_role:
+        name: check_ptf
+
+    - name: print ptfs status
+      debug:
+        msg: 'ptfs info: {{ ptfs_info }}'
+
+    - name: print ptfs status
+      debug:
+        msg: 'ptfs status: {{ ptfs_status }}'
+
+    - name: print not_loaded_ptfs_list
+      debug:
+        msg: "to be loaded ptfs list: {{ not_loaded_ptfs_list }}"
+
+    - name: print loaded_ptfs_list
+      debug:
+        msg: "Already loaded ptfs list: {{ loaded_ptfs_list }}"
+
+    - name: print product_not_installed_ptfs
+      debug:
+        msg: "Product not installed ptfs list: {{ product_not_installed_ptfs }}"
