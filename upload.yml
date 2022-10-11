@@ -14,9 +14,15 @@
     lib_name: "{{ lib_name }}"
 
   tasks:
-    - name: Copy a save file from local to a remote IBM i node
-      ibmi_copy:
+    - name: Copy file from localhost to awx
+      fetch:
         src: "{{ save_file_path }}"
+        dest: "/tmp/{{ save_file_path }}"
+      delegate_to: localhost
+
+    - name: Copy a save file from awx to a remote IBM i node
+      ibmi_copy:
+        src: "/tmp/{{ save_file_path }}"
         lib_name: "{{ lib_name }}"
       register: results
 
