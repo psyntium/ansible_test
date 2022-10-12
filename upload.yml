@@ -9,10 +9,10 @@
     lib_name: "{{ lib_name }}"
 
   tasks:
-    - name: List /tmp/repos directories
+    - name: List /tmp directories
       local_action:
         module: ansible.builtin.find
-        paths: /tmp/repos
+        paths: /tmp
         recurse: yes
         file_type: directory
       run_once: True
@@ -22,10 +22,10 @@
       debug:
         msg: "{{ directories }}"
     
-    - name: List /tmp/repos files
+    - name: List /tmp files
       local_action:
         module: ansible.builtin.find
-        paths: /tmp/repos
+        paths: /tmp
         recurse: yes
       run_once: True
       register: files
