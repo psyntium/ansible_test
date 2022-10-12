@@ -7,12 +7,13 @@
   vars:
     save_file_path: "{{ save_file_path }}"
     lib_name: "{{ lib_name }}"
+    file_path: "{{ file_path }}"
 
   tasks:
-    - name: List /tmp directories
+    - name: List file_path directories
       local_action:
         module: ansible.builtin.find
-        paths: /tmp
+        paths: "{{ file_path }}"
         recurse: yes
         file_type: directory
       run_once: True
@@ -22,10 +23,10 @@
       debug:
         msg: "{{ directories }}"
     
-    - name: List /tmp files
+    - name: List file_path files
       local_action:
         module: ansible.builtin.find
-        paths: /tmp
+        paths: "{{ file_path }}"
         recurse: yes
       run_once: True
       register: files
