@@ -5,8 +5,7 @@
    - ibm.power_ibmi
 
   vars:
-    check_ptf_list:
-      - {'ptf_id':'*ALL', 'product':'*ALL', 'release': '*ALL'}
+    check_ptf_list: "{{ check_ptf_list }}"
 
   tasks:
     - name: check ptf status
