@@ -7,34 +7,8 @@
   vars:
     save_file_path: "{{ save_file_path }}"
     lib_name: "{{ lib_name }}"
-    file_path: "{{ file_path }}"
 
   tasks:
-    - name: List file_path directories
-      local_action:
-        module: ansible.builtin.find
-        paths: "{{ file_path }}"
-        recurse: yes
-        file_type: directory
-      run_once: True
-      register: directories
-    
-    - name: directories
-      debug:
-        msg: "{{ directories }}"
-    
-    - name: List file_path files
-      local_action:
-        module: ansible.builtin.find
-        paths: "{{ file_path }}"
-        recurse: yes
-      run_once: True
-      register: files
-    
-    - name: files
-      debug:
-        msg: "{{ files }}"
-      
     - name: Copy a save file from awx to a remote IBM i node
       ibmi_copy:
         src: "{{ save_file_path }}"
