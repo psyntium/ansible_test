@@ -12,15 +12,14 @@
     - name: List /tmp directory
       local_action:
         module: ansible.builtin.find
-        paths: /tmp
+        paths: /tmp/Downloads
         recurse: no
-        file_type: directory
       run_once: True
-      register: directory
+      register: files
     
-    - name: directory
+    - name: files
       debug:
-        msg: "{{ directory }}"
+        msg: "{{ files }}"
       
     - name: Copy a save file from awx to a remote IBM i node
       ibmi_copy:
